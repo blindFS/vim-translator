@@ -2,12 +2,14 @@ if exists('g:loaded_translator') && g:loaded_translator
     finish
 endif
 
-let g:translate_cmd = get(g:, 'g:translate_cmd', 'translate {=zh+ja+en}')
+let g:translate_cmd = get(g:, 'g:translate_cmd', expand('<sfile>:p:h').
+            \ '/../google-translate-cli/translate.awk {=zh+ja+@ja+en}')
+let g:translate_player = get(g:, 'g:translate_player', 'mplayer')
 
 function! translator#speak() range
     let content = substitute(s:get_selection(), '\s', '%20', 'g')
     let uri = '"http://translate.google.com/translate_tts?tl=en&q='.content.'"'
-    call system('mplayer '.uri)
+    call system(g:translate_player.' '.uri)
 endfunction
 
 function! translator#translate(replace) range
@@ -26,7 +28,7 @@ endfunction
 
 function! translator#translate_replace() range
     let @t = translator#translate(1)
-    execute "normal gvs\<C-R>=@t\<ESC>"
+    normal! gv"tp
 endfunction
 
 function! s:get_selection()
@@ -43,6 +45,5 @@ vmap <silent> <Plug>TranslateSpeak   :call translator#speak()<CR>
 vmap <silent> <Plug>TranslateReplace :call translator#translate_replace()<CR>
 
 call s:translate_replace()
-
 
 let g:loaded_translator = 1
