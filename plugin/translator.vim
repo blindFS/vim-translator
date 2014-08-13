@@ -9,14 +9,14 @@ let g:translate_player = get(g:, 'g:translate_player', 'mplayer')
 function! translator#speak() range
     let content = substitute(s:get_selection(), '\s', '%20', 'g')
     let uri = '"http://translate.google.com/translate_tts?tl=en&q='.content.'"'
-    call system(g:translate_player.' '.uri)
+    call system(g:translate_player.' '.uri.' &')
 endfunction
 
 function! translator#translate(replace) range
     let content = s:get_selection()
     let command = g:translate_cmd.' "'.content.'"'
     let result = systemlist(command)
-    if a:replace == 1
+    if a:replace
         return result[0]
     endif
     echohl String
