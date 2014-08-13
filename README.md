@@ -1,6 +1,6 @@
 ## Dependencies
 
-* A translation tool. Defaults to [google-translate-cli](https://github.com/soimort/google-translate-cli)
+* A translation tool. Defaults to [google-translate-cli](https://github.com/soimort/google-translate-cli).
 Init the submodule if so.
 * A player for pronunciation. Defaults to mplayer
 
@@ -26,14 +26,14 @@ vmap R <Plug>TranslateReplace
 vmap P <Plug>TranslateSpeak
 ```
 
-Change `g:translate_cmd` to your preferred command for example 'translate {=zh+en}',
+* Assign `g:translate_cmd` to your preferred command for example 'translate {=zh+en}',
 the first target language specified is used in "translate and replace".
-Change `g:translate_player` to your preferred cli stream player, mplayer doesn't
+* Assign `g:translate_player` to your preferred cli stream player, mplayer doesn't
 support unicode url, so currently the speak function is only usable for English.
 
 ## Demo
 
-![gif](./demo.gif)
+![gif](./demo.gif =200x440)
 
 ## License
 
