@@ -2,9 +2,9 @@ if exists('g:loaded_translator') && g:loaded_translator
     finish
 endif
 
-let g:translate_cmd = get(g:, 'g:translate_cmd', expand('<sfile>:p:h').
+let g:translate_cmd = get(g:, 'translate_cmd', expand('<sfile>:p:h').
             \ '/../google-translate-cli/translate.awk {=zh+ja+@ja+en}')
-let g:translate_player = get(g:, 'g:translate_player', 'mplayer')
+let g:translate_player = get(g:, 'translate_player', 'mplayer')
 
 function! translator#speak() range
     let content = substitute(s:get_selection(), '\s', '%20', 'g')
