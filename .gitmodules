@@ -1,3 +1,0 @@
-[submodule "google-translate-cli"]
-	path = google-translate-cli
-	url = https://github.com/soimort/google-translate-cli

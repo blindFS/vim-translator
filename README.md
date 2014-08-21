@@ -1,7 +1,6 @@
 ## Dependencies
 
-* A translation tool. Defaults to [google-translate-cli](https://github.com/soimort/google-translate-cli).
-Init the submodule if so.
+* A translation tool. I suggest [translate-shell](https://github.com/soimort/translate-shell).
 * A player for pronunciation. Defaults to mplayer
 
 
@@ -28,8 +27,7 @@ vmap P <Plug>TranslateSpeak
 
 * Assign `g:translate_cmd` to your preferred command for example `ydcv`,
 the first target language specified is used in "translate and replace".
-* Assign `g:translate_player` to your preferred cli stream player, mplayer doesn't
-support unicode url, so currently the speak function is only usable for English.
+* Assign `g:translate_player` to your preferred cli stream player.
 
 ## Demo
 

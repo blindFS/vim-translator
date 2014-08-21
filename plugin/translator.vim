@@ -2,9 +2,13 @@ if exists('g:loaded_translator') && g:loaded_translator
     finish
 endif
 
-let g:translate_cmd = get(g:, 'translate_cmd', expand('<sfile>:p:h').
-            \ '/../google-translate-cli/translate.awk {=zh+ja+@ja+en}')
-let g:translate_player = get(g:, 'translate_player', 'mplayer')
+if !(exists('g:translate_cmd') || executable('trans'))
+    echoerr 'You need to specify a command-line translator first.'
+    finish
+endif
+let g:translate_cmd       = get(g:, 'translate_cmd', 'trans -b -t zh+ja')
+let g:translate_player    = get(g:, 'translate_player', 'mplayer')
+let g:translate_auto_yank = get(g:, 'translate_auto_yank', 1)
 
 function! translator#speak() range
     let content = substitute(s:get_selection(), '\s', '%20', 'g')
@@ -16,6 +20,9 @@ function! translator#translate(replace) range
     let content = s:get_selection()
     let command = g:translate_cmd.' "'.content.'"'
     let result = systemlist(command)
+    if g:translate_auto_yank
+        let @" = join(result, "\n")
+    endif
     if a:replace
         return result[0]
     endif
