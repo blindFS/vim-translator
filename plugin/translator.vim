@@ -10,9 +10,10 @@ let g:translate_cmd       = get(g:, 'translate_cmd', 'trans -b -t zh+ja')
 let g:translate_player    = get(g:, 'translate_player', 'mplayer')
 let g:translate_auto_yank = get(g:, 'translate_auto_yank', 1)
 
-function! translator#speak() range
+function! translator#speak(...) range
+    let tl = a:0 > 0 ? a:1 : 'en'
     let content = substitute(s:get_selection(), '\s', '%20', 'g')
-    let uri = '"http://translate.google.com/translate_tts?tl=en&q='.content.'"'
+    let uri = '"http://translate.google.com/translate_tts?ie=UTF-8&tl='.tl.'&q='.content.'"'
     call system(g:translate_player.' '.uri.' &')
 endfunction
 
